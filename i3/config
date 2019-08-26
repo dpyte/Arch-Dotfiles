@@ -30,14 +30,16 @@ font pango:monospace 8
 floating_modifier $mod
 
 # start a terminal
-# bindsym $mod+Return exec i3-sensible-terminal
-bindsym $mod+Return exec termite
+bindsym $mod+Return exec i3-sensible-terminal
+# bindsym $mod+Return exec termite
 
 # kill focused window
 bindsym $mod+Shift+q kill
 
+bindsym $mod+d exec --no-startup-id rofi -theme themes/app-launcher -show drun
+# bindsym $mod+d exec --no-startup-id rofi -show drun -show-icons
 # start dmenu (a program launcher)
-bindsym $mod+d exec dmenu_run
+# bindsym $mod+d exec dmenu_run
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
@@ -131,12 +133,24 @@ bindsym $mod+Shift+8 move container to workspace $ws8
 bindsym $mod+Shift+9 move container to workspace $ws9
 bindsym $mod+Shift+0 move container to workspace $ws10
 
+assign [class="firefox"] 		$ws2
+assign [class="vlc"] 			$ws3
+assign [class="Sublime_text"]		$ws3
+assign [class="Org.gnome.Nautilus"]	$ws4
+assign [class="Vmplayer"]		$ws4
+assign [class="code-oss"]               $ws5
+assign [class="spotify"]                $ws7
+
+for_window [class="privateinternetaccess"] floating enable
+
 # reload the configuration file
 bindsym $mod+Shift+c reload
+
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
+
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -152,10 +166,10 @@ mode "resize" {
         bindsym semicolon resize grow width 10 px or 10 ppt
 
         # same bindings, but for the arrow keys
-        bindsym Left resize shrink width 10 px or 10 ppt
-        bindsym Down resize grow height 10 px or 10 ppt
-        bindsym Up resize shrink height 10 px or 10 ppt
-        bindsym Right resize grow width 10 px or 10 ppt
+        bindsym Left resize shrink width 5 px or 5 ppt
+        bindsym Down resize grow height 5 px or 5 ppt
+        bindsym Up resize shrink height 5 px or 5 ppt
+        bindsym Right resize grow width 5 px or 5 ppt
 
         # back to normal: Enter or Escape or $mod+r
         bindsym Return mode "default"
@@ -170,46 +184,6 @@ bindsym $mod+r mode "resize"
 # bar {
 #         status_command i3status
 # }
-
-
-## Edit Zone
-
-# Wallpaper
-exec_always /home/predaking2612/.config/i3/pscircle-update.sh
-exec_always /home/predaking2612/.config/i3/refresh.sh & 
-
-# # launch categorized menu
-bindsym $mod+z exec --no-startup-id morc_menu 
-
-# Setting mouse acceleration
-exec xset m 26/10 4
-
-# Polybar
-exec_always --no-startup-id $HOME/.config/polybar/launch.sh
-
-# i3lock
-bindsym $mod+shift+x exec i3lock --color "$bg-color
-
-# Pulse Audio controls
-# I have pasted Pulse Audio Control and Screen Brightness controll code that I found online
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl -- set-sink-volume 0 +5% #increase sound volume
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl -- set-sink-volume 0 -5% #decrease sound volume
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
-
-# Sreen brightness controls
-bindsym XF86MonBrightnessUp exec xbacklight -inc 5 # increase screen brightness
-bindsym XF86MonBrightnessDown exec xbacklight -dec 5 # decrease screen brightness
-
-# Rofi
-# Following lines are copied from Alex Booker's dotfiles
-# bindsym $mod+d exec --no-startup-id rofi -show run
-# bindsym $mod+d exec rofi -show run -lines 3 -eh 2 -width 100 -padding 800 -opacity "75" -bw 0 -bc "$bg-color" -bg "$bg-color" -fg "$text-color" -hlbg "#5a8f9a" -hlfg "#9575cd" -font "System San Francisco Display 18"
-
-## Changes
-# Replaces -bg "$bg-color" with  #5a8f9a 
-
-# Applet
-exec --no-startup-id nm-applet
 
 #############################
 ### settings for i3-gaps: ###
@@ -233,12 +207,6 @@ smart_borders on
 
 # No borders
 for_window [class="^.*"] border pixel 0
-
-# Press $mod+Shift+g to enter the gap mode. Choose o or i for modifying outer/inner gaps. Press one of + / - (in-/decrement for current workspace) or 0 (remove gaps for current workspace). If you also press Shift with these keys, the change will be global for all workspaces.
-set $mode_gaps Gaps: (o) outer, (i) inner
-set $mode_gaps_outer Outer Gaps: +|-|0 (local), Shift + +|-|0 (global)
-set $mode_gaps_inner Inner Gaps: +|-|0 (local), Shift + +|-|0 (global)
-bindsym $mod+Shift+g mode "$mode_gaps"
 
 mode "$mode_gaps" {
         bindsym o      mode "$mode_gaps_outer"
@@ -271,7 +239,57 @@ mode "$mode_gaps_outer" {
         bindsym Escape mode "default"
 }
 
+# Press $mod+Shift+g to enter the gap mode. Choose o or i for modifying outer/inner gaps. Press one of + / - (in-/decrement for current workspace) or 0 (remove gaps for current workspace). If you also press Shift with these keys, the change will be global for all workspaces.
+set $mode_gaps Gaps: (o) outer, (i) inner
+set $mode_gaps_outer Outer Gaps: +|-|0 (local), Shift + +|-|0 (global)
+set $mode_gaps_inner Inner Gaps: +|-|0 (local), Shift + +|-|0 (global)
+bindsym $mod+Shift+g mode "$mode_gaps"
+
+## Edit Zone
+
+# Wallpaper
+exec --no-startup-id sudo wal -i ~/Pictures/Cyber-city.png
+
+# # launch categorized menu
+bindsym $mod+z exec --no-startup-id morc_menu 
+
+# Setting mouse acceleration
+exec_always xset m 26/10 4
+
+# Polybar
+exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+
+# Pulse Audio controls
+# I have pasted Pulse Audio Control and Screen Brightness controll code that I found online
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl -- set-sink-volume 0 +5% #increase sound volume
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl -- set-sink-volume 0 -5% #decrease sound volume
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
+
+# Sreen brightness controls
+bindsym XF86MonBrightnessUp exec xbacklight -inc 5 # increase screen brightness
+bindsym XF86MonBrightnessDown exec xbacklight -dec 5 # decrease screen brightness
+
+## Changes
+# Replaces -bg "$bg-color" with  #5a8f9a 
+
+# Applet
+exec --no-startup-id nm-applet
+
+# i3lock-color
+bindsym $mod+Shift+x exec i3lock-fancy -p -g -t "WARNING: Firewalls overloaded"
+
 ## Autostart
 
-exec --no-startup-id compton -b
+exec vmware-user-suid-wrapper --no-startup-id
+exec --no-startup-id compton --config /home/predaking2612/.config/compton/compton.conf
+# exec_always compton --blur-method kawase
+exec --no-startup-id batifyd
+exec --no-startup-id redshift -O 5000
 
+
+# GAPS
+
+bindsym $mod+y       gaps inner current minus 5
+bindsym $mod+u       gaps inner current plus 5
+bindsym $mod+Shift+y gaps outer current minus 5
+bindsym $mod+Shift+u gaps outer current plus 5

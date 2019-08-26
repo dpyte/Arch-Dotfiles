@@ -1,0 +1,32 @@
+check-interval = 60
+battery-warning = 30
+batter-charged-warning = 78
+
+---
+FUTURE Implements:
+
+[
+- 1: yes
+- 0: no
+
+	battery-care : 1
+	ext-power-consume-soft : 1
+	hibernate-on-low : 1 (This is actual battery percentage value, or 0: no)
+	daily-report : 0 (creates a report file at specified time)
+	daily-report-time: 1800 (use 24-hours format)			
+]
+---
+
+---
+NOTE: Do not leave equal-to sign without a variable and its assigned [numerical] value
+---
+
+---
+This config will only consider a variable and its value to be acceptable
+if it contains a space before and after an equal-to sign. 
+anything else will be scrapped.
+
+check-interval: scans for changes over [X]seconds
+battery-warning: at what percentage to warn
+batter-charged-warning: when to unplug the charger. [Helpful]
+---
