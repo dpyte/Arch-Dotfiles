@@ -1,0 +1,105 @@
+Xft.dpi:                        96
+Xft.antialias:                  1
+Xft.autohint:                   1
+Xft.hinting:                    1
+Xft.hintstyle:                  hintslight
+Xft.lcdfilter:                  lcdlight
+Xft.rgba:                       rgb
+
+URxvt.depth:                    25
+URxvt*lineSpace:                1
+URxvt.letterSpace:              -1
+
+URxvt.scrollBar:                false
+URxvt*loginShell:               true
+URxvt.internalBorder:           25
+
+URxvt.matcher.button: 		1
+URxvt.blurRadius:		25
+
+*.foreground:   #ffeefc
+*.background:   #141021
+*.cursorColor:  #c16772
+
+! black
+*.color0:       #4f4858
+*.color8:       #545d67
+
+! red
+*.color1:       #c05c47
+*.color9:       #c16772
+
+! green
+*.color2:       #428e8e
+*.color10:      #afda6e
+
+! yellow
+*.color3:       #e4b226
+*.color11:      #ebcf1a
+
+! blue
+*.color4:       #4457a3
+*.color12:      #4880a5
+
+! magenta
+*.color5:       #903a62
+*.color13:      #9568a1
+
+! cyan
+*.color6:       #7aa1dc
+*.color14:      #abbcda
+
+! white
+*.color7:       #c4b7c5
+*.color15:      #ffeefc
+
+
+urxvt*termName:         rxvt-unicode
+urxvt*urlLauncher:      Firefox
+urxvt*matcher.button:   1
+urxvt*keysym.S-Prior:   ^[[5;2~
+urxvt*keysym.S-N?ext:    ^[[6;2~
+
+urxvt*geometry:      100x30
+urxvt*highlightSelection: true
+urxvt*transparent: true
+urxvt*shading: 16
+urxv*tintColor: #00000
+
+! removing urxvt scrollbar
+urxvt.scrollBar: false
+
+! fonts
+! URxvt.font: xft:PragmataPro Nerd Font:pixelsize=20
+URxvt.font: xft:DejaVu Sans Mono:pixelsize=20
+! URxvt.font: xft:Source Code Pro:pixelsize=20:antialias=true:hinting=true
+! URxvt.letterSpace: -1
+! Extentions
+
+urxvt.perl-ext-common: clipboard,resize-font
+
+! Clipboard
+urxvt.clipboard.autocopy: true
+! urxvt.keysym.M-c: perl:clipboard:copy
+! urxvt.keysym.M-v: perl:clipboard:paste
+
+
+! ---------------------------------------------------------------------------------------- !
+! ======================================================================================== ! 
+
+
+! ROFI
+rofi.font: RobotoMono Nerd Font 19 
+rofi.fullscreen: true
+rofi.show-icons: true
+rofi.columns: 2
+rofi.padding: 270
+rofi.hide-scrollbar: true
+rofi.separator-style: none 
+!                  Background   Border      Separator 
+rofi.color-window: #0B131C,      #0B131C,     #0B131C
+! State:           ´bg´,     ´fg´,     ´bgalt´,  ´hlbg´,   ´hlfg´
+rofi.color-normal: #0B131C,  #E0FFFF,  #0B131C,  #0B131C,  #127bcc
+rofi.color-urgent: #0B131C,  #E0FFFF,  #0B131C,  #0B131C,  #127bcc
+rofi.color-active: #0B131C, #E0FFFF, #0B131C, #0B131C, #127bcc
+
