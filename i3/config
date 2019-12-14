@@ -36,8 +36,8 @@ bindsym $mod+Return exec i3-sensible-terminal
 # kill focused window
 bindsym $mod+Shift+q kill
 
-bindsym $mod+d exec --no-startup-id rofi -theme themes/app-launcher -show drun
-# bindsym $mod+d exec --no-startup-id rofi -show drun -show-icons
+# bindsym $mod+d exec --no-startup-id rofi -theme themes/app-launcher -show drun
+bindsym $mod+d exec --no-startup-id rofi -show drun -show-icons
 # start dmenu (a program launcher)
 # bindsym $mod+d exec dmenu_run
 # There also is the (new) i3-dmenu-desktop which only displays applications
@@ -132,6 +132,17 @@ bindsym $mod+Shift+7 move container to workspace $ws7
 bindsym $mod+Shift+8 move container to workspace $ws8
 bindsym $mod+Shift+9 move container to workspace $ws9
 bindsym $mod+Shift+0 move container to workspace $ws10
+
+workspace $ws1 output HDMI-0
+workspace $ws2 output HDMI-0
+workspace $ws3 output HDMI-0
+workspace $ws4 output HDMI-0
+workspace $ws5 output HDMI-0
+workspace $ws6 output DP-0
+workspace $ws7 output DP-0
+workspace $ws8 output DP-0
+workspace $ws9 output DP-0
+workspace $ws0 output DP-0
 
 assign [class="firefox"] 		$ws2
 assign [class="vlc"] 			$ws3
@@ -248,10 +259,7 @@ bindsym $mod+Shift+g mode "$mode_gaps"
 ## Edit Zone
 
 # Wallpaper
-exec --no-startup-id sudo wal -i ~/Pictures/Cyber-city.png
-
-# # launch categorized menu
-bindsym $mod+z exec --no-startup-id morc_menu 
+exec --no-startup-id feh --bg-center ~/Pictures/000.png
 
 # Setting mouse acceleration
 exec_always xset m 26/10 4
@@ -269,23 +277,13 @@ bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute s
 bindsym XF86MonBrightnessUp exec xbacklight -inc 5 # increase screen brightness
 bindsym XF86MonBrightnessDown exec xbacklight -dec 5 # decrease screen brightness
 
-## Changes
-# Replaces -bg "$bg-color" with  #5a8f9a 
-
-# Applet
-exec --no-startup-id nm-applet
-
 # i3lock-color
 bindsym $mod+Shift+x exec i3lock-fancy -p -g -t "WARNING: Firewalls overloaded"
 
-## Autostart
-
-exec vmware-user-suid-wrapper --no-startup-id
 exec --no-startup-id compton --config /home/predaking2612/.config/compton/compton.conf
+
 # exec_always compton --blur-method kawase
 exec --no-startup-id batifyd
-exec --no-startup-id redshift -O 5000
-
 
 # GAPS
 
@@ -293,3 +291,7 @@ bindsym $mod+y       gaps inner current minus 5
 bindsym $mod+u       gaps inner current plus 5
 bindsym $mod+Shift+y gaps outer current minus 5
 bindsym $mod+Shift+u gaps outer current plus 5
+
+exec --no-startup-id xrandr --output HDMI-0 --left-of DP-0
+
+# exec xrandr --output HDMI-0 --left-of DP-0
