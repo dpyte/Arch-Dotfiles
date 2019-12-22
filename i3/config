@@ -144,13 +144,13 @@ workspace $ws8 output DP-0
 workspace $ws9 output DP-0
 workspace $ws0 output DP-0
 
-assign [class="firefox"] 		$ws2
-assign [class="vlc"] 			$ws3
-assign [class="Sublime_text"]		$ws3
-assign [class="Org.gnome.Nautilus"]	$ws4
-assign [class="Vmplayer"]		$ws4
-assign [class="code-oss"]               $ws5
-assign [class="spotify"]                $ws7
+# assign [class="firefox"] 		$ws2
+# assign [class="vlc"] 			$ws3
+# assign [class="Sublime_text"]		$ws3
+# assign [class="Org.gnome.Nautilus"]	$ws4
+# assign [class="Vmplayer"]		$ws4
+# assign [class="code-oss"]               $ws5
+# assign [class="spotify"]                $ws7
 
 for_window [class="privateinternetaccess"] floating enable
 
@@ -259,7 +259,7 @@ bindsym $mod+Shift+g mode "$mode_gaps"
 ## Edit Zone
 
 # Wallpaper
-exec --no-startup-id feh --bg-center ~/Pictures/000.png
+exec --no-startup-id feh --bg-center ~/Pictures/pied_piper.jpg
 
 # Setting mouse acceleration
 exec_always xset m 26/10 4
