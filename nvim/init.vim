@@ -1,3 +1,5 @@
+set shell=/bin/bash
+
 " Plugins
 call plug#begin()
 Plug 'w0rp/ale'
@@ -5,6 +7,7 @@ Plug 'rust-lang/rust.vim'
 Plug 'morhetz/gruvbox'
 Plug 'benekastah/neomake'
 Plug 'ciaranm/securemodelines'
+Plug 'rust-lang/rust.vim'
 Plug 'airblade/vim-rooter'
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
@@ -12,6 +15,7 @@ Plug 'wincent/command-t'
 Plug 'joonty/vdebug'
 Plug 'rhysd/vim-clang-format'
 " Plug 'tomasiser/vim-code-dark'
+" Plug 'ludovicchabant/vim-gutentags'
 Plug 'majutsushi/tagbar'
 "Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -22,8 +26,13 @@ Plug 'autozimu/LanguageClient-neovim', {
 Plug 'tpope/vim-fugitive'
 Plug 'chiel92/vim-autoformat'
 Plug 'sbdchd/neoformat'
+Plug 'editorconfig/editorconfig-vim'
+Plug 'justinmk/vim-sneak'
+Plug 'cespare/vim-toml'
+Plug 'plasticboy/vim-markdown'
 Plug 'vim-airline/vim-airline'
 Plug 'airblade/vim-gitgutter'
+Plug 'andymass/vim-matchup'
 Plug 'shougo/deoplete.nvim'
 Plug 'sainnhe/forest-night'
 Plug 'octol/vim-cpp-enhanced-highlight'
@@ -58,6 +67,8 @@ set background=dark
 set signcolumn=yes
 set relativenumber " Relative line numbers
 set synmaxcol=512
+" set colorcolumn=86 " and give me a colored column
+set laststatus=2
 
 "=================================================================
 
@@ -68,6 +79,8 @@ let g:LanguageClient_settingsPath = '/home/predaking2612/.config/nvim/settings.j
 let g:LanguageClient_autoStart = 1
 set completefunc=LanguageClient#complete
 set formatexpr=LanguageClient_textDocument_rangeFormatting()
+
+autocmd CursorHold * silent call CocActionAsync('highlight')
 
 " =================================================================
 
@@ -93,12 +106,12 @@ cnoremap <C-j> <Down>
 cnoremap <C-k> <Up>
 cnoremap <C-l> <Right>
 
-nnoremap <up> <nop>
-nnoremap <down> <nop>
-inoremap <up> <nop>
-inoremap <down> <nop>
-inoremap <left> <nop>
-inoremap <right> <nop>
+" nnoremap <up> <nop>
+" nnoremap <down> <nop>
+" inoremap <up> <nop>
+" inoremap <down> <nop>
+" inoremap <left> <nop>
+" inoremap <right> <nop>
 
 " -----------------------------------------------------------------
 
@@ -123,6 +136,8 @@ nnoremap <C-p> :GFiles<CR>
 set updatetime=300
 au CursorHold * sil call CocActionAsync('highlight')
 au CursorHoldI * sil call CocActionAsync('showSignatureHelp')
+
+au BufRead,BufNewFile *.stc setfiletype ul
 
 "-----------------------------------------------------------------
 
