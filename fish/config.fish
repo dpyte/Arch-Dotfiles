@@ -6,7 +6,10 @@ set __fish_git_prompt_showstashstate ''
 set __fish_git_prompt_showupstream 'none'
 set -g fish_prompt_pwd_dir_length 3
 
+export PATH="/home/predaking2612/dev/tmp/fuchsia/.jiri_root/bin:$PATH"
+
 abbr -a e nvim
+abbr -a n ninja
 
 # colored man output
 # from http://linuxtidbits.wordpress.com/2009/03/23/less-colors-for-man-pages/
@@ -45,6 +48,13 @@ end
 
 # enable tab completion
 complete -x -c j -a '(autojump --complete (commandline -t))'
+
+# Set proper color
+if [ $TERM = screen ]
+	set TERM screen-256color
+else
+	set TERM xterm-256color
+end
 
 
 # set error file location
@@ -220,6 +230,10 @@ end
 export XAUTHORITY=$HOME/.Xauthority
 export TERM=xterm-256color
 
+export CCLANG="$HOME/dev/development/C/CalcOs/toolchain/build/CCOS_LLVM_INSTALL/bin/clang"
+export CCLANGPP="$HOME/dev/development/C/CalcOs/toolchain/build/CCOS_LLVM_INSTALL/bin/clang++"
+
+alias tmux='tmux -2'
 alias gd="git diff"
 alias gs="git status"
 alias ..="cd .."

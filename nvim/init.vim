@@ -4,7 +4,7 @@ set shell=/bin/bash
 call plug#begin()
 Plug 'w0rp/ale'
 Plug 'rust-lang/rust.vim'
-Plug 'morhetz/gruvbox'
+" Plug 'morhetz/gruvbox'
 Plug 'benekastah/neomake'
 Plug 'ciaranm/securemodelines'
 Plug 'rust-lang/rust.vim'
@@ -27,7 +27,7 @@ Plug 'dpelle/vim-LanguageTool'
 " LaTeX
 Plug 'xuhdev/vim-latex-live-preview'
 Plug 'lervag/vimtex'
-Plug 'sirver/ultisnips'
+"Plug 'sirver/ultisnips'
 Plug   'KeitaNakamura/tex-conceal.vim', {'for': 'tex'} " for VimPlug
 
 " Syntax
@@ -39,7 +39,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'wincent/command-t'
 Plug 'mg979/vim-studio-dark'
-Plug 'joonty/vdebug'
+"Plug 'joonty/vdebug'
 Plug 'rhysd/vim-clang-format'
 " Plug 'tomasiser/vim-code-dark'
 " Plug 'ludovicchabant/vim-gutentags'
@@ -69,7 +69,7 @@ call plug#end()
 "-----------------------------------------------------------------
 " colorscheme vsdark
 " Editor options 
-" [NIL] colorscheme base16-default
+" colorscheme base16-default
 " let g:Vsd = {}
 
 syntax enable
@@ -113,14 +113,10 @@ autocmd CursorHold * silent call CocActionAsync('highlight')
 
 " =================================================================
 " deal with colors
-if !has('gui_running')
-  set t_Co=256
-endif
-if (match($TERM, "-256color") != -1) && (match($TERM, "screen-256color") == -1)
-  " screen does not (yet) support truecolor
-  set termguicolors
-endif
-let base16colorspace=256
+
+set t_Co=256
+set termguicolors
+" colorscheme naysayer88
 
 " =================================================================
 " No arrow keys --- force yourself to use the home row
@@ -142,16 +138,16 @@ cnoremap <C-l> <Right>
 
 " -----------------------------------------------------------------
 
-let g:gruvbox_termcolors=16
-let g:gruvbox_contrast_dark = 'hard'
-nnoremap <silent> [oh :call gruvbox#hls_show()<CR>
-nnoremap <silent> ]oh :call gruvbox#hls_hide()<CR>
-nnoremap <silent> coh :call gruvbox#hls_toggle()<CR>
+" let g:gruvbox_termcolors=16
+" let g:gruvbox_contrast_dark = 'hard'
+" nnoremap <silent> [oh :call gruvbox#hls_show()<CR>
+" nnoremap <silent> ]oh :call gruvbox#hls_hide()<CR>
+" nnoremap <silent> coh :call gruvbox#hls_toggle()<CR>
 
-nnoremap * :let @/ = ""<CR>:call gruvbox#hls_show()<CR>*
-nnoremap / :let @/ = ""<CR>:call gruvbox#hls_show()<CR>/
-nnoremap ? :let @/ = ""<CR>:call gruvbox#hls_show()<CR>?
-colorscheme gruvbox
+" nnoremap * :let @/ = ""<CR>:call gruvbox#hls_show()<CR>*
+" nnoremap / :let @/ = ""<CR>:call gruvbox#hls_show()<CR>/
+" nnoremap ? :let @/ = ""<CR>:call gruvbox#hls_show()<CR>?
+" colorscheme gruvbox
 
 nnoremap <silent> gh :call LanguageClient#textDocument_hover()<CR>
 nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
@@ -181,9 +177,9 @@ let g:tex_subscripts= "[0-9aehijklmnoprstuvx,+-/().]"
 let conceallevel=1
 let g:tex_conceal='abdmg'
 
-let g:UltiSnipsExpandTrigger = '<tab>'
-let g:UltiSnipsJumpForwardTrigger = '<tab>'
-let g:UltiSnipsJumpBackwardTrigger = '<s-tab>'
+"#let g:UltiSnipsExpandTrigger = '<tab>'
+"#let g:UltiSnipsJumpForwardTrigger = '<tab>'
+"#let g:UltiSnipsJumpBackwardTrigger = '<s-tab>'
 
 nmap <F12> :LLPStartPreview<cr>
 
@@ -208,6 +204,33 @@ command! -bang -nargs=* Rg
   \           : fzf#vim#with_preview('right:50%:hidden', '?'),
   \   <bang>0)
 
+" Set mapleader
+let mapleader = "\\"
+
+" Buffer swap
+function! MarkWindowSwap()
+    let g:markedWinNum = winnr()
+endfunction
+
+function! DoWindowSwap()
+    "Mark destination
+    let curNum = winnr()
+    let curBuf = bufnr( "%" )
+    exe g:markedWinNum . "wincmd w"
+    "Switch to source and shuffle dest->source
+    let markedBuf = bufnr( "%" )
+    "Hide and open so that we aren't prompted and keep history
+    exe 'hide buf' curBuf
+    "Switch to dest and shuffle source->dest
+    exe curNum . "wincmd w"
+    "Hide and open so that we aren't prompted and keep history
+    exe 'hide buf' markedBuf 
+endfunction
+
+nmap <silent> <leader>mw :call MarkWindowSwap()<CR>
+nmap <silent> <leader>pw :call DoWindowSwap()<CR>
+
+" =====================================
 
 map <C-f> <Esc><Esc>:Files!<CR>
 inoremap <C-f> <Esc><Esc>:BLines!<CR>
@@ -285,7 +308,6 @@ inoremap <C-l> <c-g>u<Esc>[s1z=`]a<c-g>u
 " Use preset argument to open it
 nmap <space>ed :CocCommand explorer --preset .vim<CR>
 nmap <space>ef :CocCommand explorer --preset floating<CR>
-
 " Tagbar
 nmap <F8> :TagbarToggle<CR>
 
