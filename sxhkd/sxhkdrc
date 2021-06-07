@@ -4,7 +4,7 @@
 
 # terminal emulator
 super + Return
-	kitty
+	Alacritty
 
 # program launcher
 super + @space
@@ -122,12 +122,12 @@ super + {h,j,k,l}
 	bspc node -v {-20 0,0 20,0 -20,20 0}
 
 # Brightness Control
+# Brightness Control
 XF86MonBrightnessUp 
 	xbacklight -inc 5 # increase screen brightness
 
 XF86MonBrightnessDown 
 	xbacklight -dec 5 # increase screen brightness
-
 # Volume Control
 
 #increase sound volume

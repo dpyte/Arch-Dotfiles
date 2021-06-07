@@ -11,4 +11,4 @@ while pgrep -u $UID -x polybar >/dev/null; do sleep 1; done
 # Launch fullbar
 polybar fullbar &
 polybar config_main &
-polybar config_side &
+# polybar config_side &

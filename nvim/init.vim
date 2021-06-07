@@ -3,32 +3,20 @@ set shell=/bin/bash
 " Plugins
 call plug#begin()
 Plug 'w0rp/ale'
-Plug 'rust-lang/rust.vim'
 " Plug 'morhetz/gruvbox'
-Plug 'benekastah/neomake'
 Plug 'ciaranm/securemodelines'
-Plug 'rust-lang/rust.vim'
 " Syntactic language support
-Plug 'cespare/vim-toml'
-Plug 'stephpy/vim-yaml'
 Plug 'rust-lang/rust.vim'
-Plug 'rhysd/vim-clang-format'
-"Plug 'fatih/vim-go'
+Plug 'fatih/vim-go'
 Plug 'dag/vim-fish'
 Plug 'godlygeek/tabular'
-Plug 'plasticboy/vim-markdown'
 " GUI enhancements
 Plug 'itchyny/lightline.vim'
 Plug 'machakann/vim-highlightedyank'
 Plug 'andymass/vim-matchup'
 
 Plug 'dpelle/vim-LanguageTool'
-
-" LaTeX
-Plug 'xuhdev/vim-latex-live-preview'
-Plug 'lervag/vimtex'
-"Plug 'sirver/ultisnips'
-Plug   'KeitaNakamura/tex-conceal.vim', {'for': 'tex'} " for VimPlug
+Plug 'ap/vim-buftabline'
 
 " Syntax
 Plug 'vim-syntastic/syntastic'
@@ -38,12 +26,7 @@ Plug 'airblade/vim-rooter'
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'wincent/command-t'
-Plug 'mg979/vim-studio-dark'
-"Plug 'joonty/vdebug'
 Plug 'rhysd/vim-clang-format'
-" Plug 'tomasiser/vim-code-dark'
-" Plug 'ludovicchabant/vim-gutentags'
-"Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'autozimu/LanguageClient-neovim', {
     \ 'branch': 'next',
@@ -56,21 +39,15 @@ Plug 'editorconfig/editorconfig-vim'
 Plug 'justinmk/vim-sneak'
 Plug 'cespare/vim-toml'
 Plug 'plasticboy/vim-markdown'
-Plug 'vim-airline/vim-airline'
 Plug 'airblade/vim-gitgutter'
 Plug 'andymass/vim-matchup'
 Plug 'shougo/deoplete.nvim'
-Plug 'sainnhe/forest-night'
 Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'tpope/vim-fugitive'
 Plug 'kassio/neoterm'
 Plug 'anned20/vimsence'
 call plug#end()
 "-----------------------------------------------------------------
-" colorscheme vsdark
-" Editor options 
-" colorscheme base16-default
-" let g:Vsd = {}
 
 syntax enable
 
@@ -83,9 +60,6 @@ set cindent
 
 set showmatch
 set showcmd
-" set cursorline
-"
-" set background=dark
 set laststatus=2
 
 set incsearch
@@ -96,13 +70,11 @@ set background=dark
 set signcolumn=yes
 set relativenumber " Relative line numbers
 set synmaxcol=512
-" set colorcolumn=86 " and give me a colored column
 set laststatus=2
 
 "=================================================================
 
 " Language Options
-" let g:LanguageClient_settingsPath = $HOME . '/.config/nvim/settings.json'
 let g:LanguageClient_loadSettings = 1 " Use an absolute configuration path if you want system-wide settings
 let g:LanguageClient_settingsPath = '/home/predaking2612/.config/nvim/settings.json'
 let g:LanguageClient_autoStart = 1
@@ -116,7 +88,6 @@ autocmd CursorHold * silent call CocActionAsync('highlight')
 
 set t_Co=256
 set termguicolors
-" colorscheme naysayer88
 
 " =================================================================
 " No arrow keys --- force yourself to use the home row
@@ -129,25 +100,9 @@ cnoremap <C-j> <Down>
 cnoremap <C-k> <Up>
 cnoremap <C-l> <Right>
 
-" nnoremap <up> <nop>
-" nnoremap <down> <nop>
-" inoremap <up> <nop>
-" inoremap <down> <nop>
-" inoremap <left> <nop>
-" inoremap <right> <nop>
+nnoremap  <C-> <space>
 
 " -----------------------------------------------------------------
-
-" let g:gruvbox_termcolors=16
-" let g:gruvbox_contrast_dark = 'hard'
-" nnoremap <silent> [oh :call gruvbox#hls_show()<CR>
-" nnoremap <silent> ]oh :call gruvbox#hls_hide()<CR>
-" nnoremap <silent> coh :call gruvbox#hls_toggle()<CR>
-
-" nnoremap * :let @/ = ""<CR>:call gruvbox#hls_show()<CR>*
-" nnoremap / :let @/ = ""<CR>:call gruvbox#hls_show()<CR>/
-" nnoremap ? :let @/ = ""<CR>:call gruvbox#hls_show()<CR>?
-" colorscheme gruvbox
 
 nnoremap <silent> gh :call LanguageClient#textDocument_hover()<CR>
 nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
@@ -163,25 +118,6 @@ au CursorHoldI * sil call CocActionAsync('showSignatureHelp')
 au BufRead,BufNewFile *.stc setfiletype ul
 
 "-----------------------------------------------------------------
-
-" LaTeX
-autocmd Filetype tex setl updatetime=1
-let g:livepreview_previewer = 'open -a zathura'
-let g:tex_flavor='latex'
-let g:vimtex_view_method='zathura'
-let g:vimtex_quickfix_mode=0
-
-let g:tex_conceal_frac=1
-let g:tex_superscripts= "[0-9a-zA-W.,:;+-<>/()=]"
-let g:tex_subscripts= "[0-9aehijklmnoprstuvx,+-/().]"
-let conceallevel=1
-let g:tex_conceal='abdmg'
-
-"#let g:UltiSnipsExpandTrigger = '<tab>'
-"#let g:UltiSnipsJumpForwardTrigger = '<tab>'
-"#let g:UltiSnipsJumpBackwardTrigger = '<s-tab>'
-
-nmap <F12> :LLPStartPreview<cr>
 
 " CPP Options
 " Cpp Enhanced Highlighting {{{
@@ -204,8 +140,6 @@ command! -bang -nargs=* Rg
   \           : fzf#vim#with_preview('right:50%:hidden', '?'),
   \   <bang>0)
 
-" Set mapleader
-let mapleader = "\\"
 
 " Buffer swap
 function! MarkWindowSwap()
@@ -249,21 +183,6 @@ command! -bang -nargs=? -complete=dir Files
 nnoremap <leader>e :e <C-R>=expand("%:p:h") . "/" <CR>
 " ===============================================================
 "
-
-" This is new style
-call deoplete#custom#var('omni', 'input_patterns', {
-      \ 'tex': g:vimtex#re#deoplete
-      \})
-" Trigger configuration. You need to change this to something other than <tab> if you use one of the following:
-" - https://github.com/Valloric/YouCompleteMe
-" - https://github.com/nvim-lua/completion-nvim
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
-
-" If you want :UltiSnipsEdit to split your window.
-let g:UltiSnipsEditSplit="vertical"
-
 
 " Coc-Explorer
 let g:coc_explorer_global_presets = {
@@ -310,7 +229,28 @@ nmap <space>ed :CocCommand explorer --preset .vim<CR>
 nmap <space>ef :CocCommand explorer --preset floating<CR>
 " Tagbar
 nmap <F8> :TagbarToggle<CR>
+let g:buftabline_numbers = 1
 
 " List all presets
 nmap <space>el :CocList explPresets
 
+" Remap window-layer
+let mapleader = " "
+nnoremap <SPACE> <Nop>
+nnoremap <Leader>w <C-w>
+
+" Remap previous and next buffer
+nnoremap <silent><leader><Tab><Right> :bnext<CR>
+nnoremap <silent><leader><Tab><Left>  :bprevious<CR>
+
+" Tabs := Previous / Next 
+noremap <leader>1 1gt
+noremap <leader>2 2gt
+noremap <leader>3 3gt
+noremap <leader>4 4gt
+noremap <leader>5 5gt
+noremap <leader>6 6gt
+noremap <leader>7 7gt
+noremap <leader>8 8gt
+noremap <leader>9 9gt
+noremap <leader>0 :tablast<cr>

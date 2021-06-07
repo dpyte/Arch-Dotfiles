@@ -6,7 +6,8 @@ set __fish_git_prompt_showstashstate ''
 set __fish_git_prompt_showupstream 'none'
 set -g fish_prompt_pwd_dir_length 3
 
-export PATH="/home/predaking2612/dev/tmp/fuchsia/.jiri_root/bin:$PATH"
+export PATH="/home/predaking2612/dev/tmp/FuchsiaOs/fuchsia/.jiri_root/bin:$PATH"
+/home/predaking2612/dev/tmp/FuchsiaOs/fuchsia/scripts/fx-env.sh
 
 abbr -a e nvim
 abbr -a n ninja
@@ -227,17 +228,34 @@ function fish_greeting
 	echo
 end
 
+eval (opam env)
+
 export XAUTHORITY=$HOME/.Xauthority
 export TERM=xterm-256color
 
 export CCLANG="$HOME/dev/development/C/CalcOs/toolchain/build/CCOS_LLVM_INSTALL/bin/clang"
 export CCLANGPP="$HOME/dev/development/C/CalcOs/toolchain/build/CCOS_LLVM_INSTALL/bin/clang++"
 
-alias tmux='tmux -2'
-alias gd="git diff"
-alias gs="git status"
+alias docker="bash /home/predaking2612/dev/scripts/dockr/dockr"
+
+alias conda="~/anaconda3/bin/conda"
+
 alias ..="cd .."
-alias vim "nvim"
-alias ls "exa"
-alias ll "exa -l"
+alias gd="git diff"
+alias gp="git push"
+alias gpl="git pull"
+alias gs="git status"
 alias l "exa -lh"
+alias ll "exa -l"
+alias ls "exa"
+alias tmux='tmux -2'
+alias vim "nvim"
+alias demacs "~/.emacs.d/bin/doom"
+alias pay "pacman -Slq | fzf -m --preview 'cat (pacman -Si {1} | psub) (pacman -Fl {1} | awk "{print \$2}" | psub)' | xargs -ro sudo pacman -S"
+alias ffx='/home/predaking2612/dev/tmp/FuchsiaOs/ffx-linux-x64'
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+eval /home/predaking2612/anaconda3/bin/conda "shell.fish" "hook" $argv | source
+# <<< conda initialize <<<
+

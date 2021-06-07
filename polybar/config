@@ -1,6 +1,6 @@
 [bar/fullbar]
 wm-restack = bspwm
-monitor = HDMI-0
+monitor = DP-0
 include-file = ~/.config/polybar/fullbar
 
 background = #bb282a36
