@@ -131,7 +131,7 @@ let g:airline#extensions#tabline#buffer_nr_show = 1
 " }}}
 
 " <leader>s for Rg search
-noremap <leader>s :Rg
+noremap <leader>f :Rg
 let g:fzf_layout = { 'down': '~25%' }
 command! -bang -nargs=* Rg
   \ call fzf#vim#grep(
@@ -169,6 +169,17 @@ nmap <silent> <leader>pw :call DoWindowSwap()<CR>
 map <C-f> <Esc><Esc>:Files!<CR>
 inoremap <C-f> <Esc><Esc>:BLines!<CR>
 map <C-g> <Esc><Esc>:BCommits!<CR>
+
+nnoremap <silent> <Leader>b :Buffers<CR>
+nnoremap <silent> <C-f> :Files<CR>
+nnoremap <silent> <Leader>f :Rg<CR>
+nnoremap <silent> <Leader>/ :BLines<CR>
+nnoremap <silent> <Leader>' :Marks<CR>
+nnoremap <silent> <Leader>g :Commits<CR>
+nnoremap <silent> <Leader>H :Helptags<CR>
+nnoremap <silent> <Leader>hh :History<CR>
+nnoremap <silent> <Leader>h: :History:<CR>
+nnoremap <silent> <Leader>h/ :History/<CR> 
 
 function! s:list_cmd()
   let base = fnamemodify(expand('%'), ':h:.:S')
@@ -240,8 +251,8 @@ nnoremap <SPACE> <Nop>
 nnoremap <Leader>w <C-w>
 
 " Remap previous and next buffer
-nnoremap <silent><leader><Tab><Right> :bnext<CR>
-nnoremap <silent><leader><Tab><Left>  :bprevious<CR>
+nnoremap <silent><leader><Tab>n :bnext<CR>
+nnoremap <silent><leader><Tab>p  :bprevious<CR>
 
 " Tabs := Previous / Next 
 noremap <leader>1 1gt
