@@ -6,8 +6,10 @@ set __fish_git_prompt_showstashstate ''
 set __fish_git_prompt_showupstream 'none'
 set -g fish_prompt_pwd_dir_length 3
 
-export PATH="/home/predaking2612/dev/tmp/FuchsiaOs/fuchsia/.jiri_root/bin:$PATH"
-/home/predaking2612/dev/tmp/FuchsiaOs/fuchsia/scripts/fx-env.sh
+set TFLITE_MICRO_PROOT /home/predaking2612/dev/tmp/tflite-micro
+
+fish_add_path /home/predaking2612/Matlab/bin
+fish_add_path /home/predaking2612/dev/tmp/fuchsia/.jiri_root/bin 
 
 abbr -a e nvim
 abbr -a n ninja
@@ -166,18 +168,24 @@ end
 function fish_prompt
 	set_color brblack
 	echo -n "["(date "+%H:%M")"] "
+	# set_color green
 	set_color blue
-	echo -n (hostname)
+	# echo -n (hostname)
+	echo -n "com :: "
 	if [ $PWD != $HOME ]
 		set_color brblack
-		echo -n ':'
+		# echo -n ':'
 		set_color yellow
 		echo -n (basename $PWD)
+	else
+		set_color green 
+		echo -n '~'
 	end
 	set_color green
-	printf '%s ' (__fish_git_prompt)
+	printf '%s' (__fish_git_prompt)
 	set_color red
-	echo -n 'λ '
+	echo -n ' λ '
+	# echo -n 'ϕ '
 	set_color normal
 end
 
@@ -228,19 +236,19 @@ function fish_greeting
 	echo
 end
 
-eval (opam env)
 
 export XAUTHORITY=$HOME/.Xauthority
 export TERM=xterm-256color
+export EDITOR=nvim
+export _JAVA_AWT_WM_NONREPARENTING=1
+# alias docker="bash /home/predaking2612/dev/scripts/dockr/dockr"
 
-export CCLANG="$HOME/dev/development/C/CalcOs/toolchain/build/CCOS_LLVM_INSTALL/bin/clang"
-export CCLANGPP="$HOME/dev/development/C/CalcOs/toolchain/build/CCOS_LLVM_INSTALL/bin/clang++"
-
-alias docker="bash /home/predaking2612/dev/scripts/dockr/dockr"
-
-alias conda="~/anaconda3/bin/conda"
+alias fx="/home/predaking2612/dev/tmp/fuchsia/scripts/fx"
 
 alias ..="cd .."
+# alias cat="bat"
+alias conda="~/anaconda3/bin/conda"
+alias demacs "~/.emacs.d/bin/doom"
 alias gd="git diff"
 alias gp="git push"
 alias gpl="git pull"
@@ -248,14 +256,22 @@ alias gs="git status"
 alias l "exa -lh"
 alias ll "exa -l"
 alias ls "exa"
+alias pay "pacman -Slq | fzf -m --preview 'cat (pacman -Si {1} | psub) (pacman -Fl {1} | awk "{print \$2}" | psub)' | xargs -ro sudo pacman -S"
+alias reload_fish=". ~/.config/fish/config.fish"
+alias rmsym="rm -i"
+alias softln="ln -s"
 alias tmux='tmux -2'
 alias vim "nvim"
-alias demacs "~/.emacs.d/bin/doom"
-alias pay "pacman -Slq | fzf -m --preview 'cat (pacman -Si {1} | psub) (pacman -Fl {1} | awk "{print \$2}" | psub)' | xargs -ro sudo pacman -S"
-alias ffx='/home/predaking2612/dev/tmp/FuchsiaOs/ffx-linux-x64'
+alias cat "bat"
+alias fistory="history --show-time='%h/%d - %H:%M:%S '"
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
 eval /home/predaking2612/anaconda3/bin/conda "shell.fish" "hook" $argv | source
 # <<< conda initialize <<<
 
+source /home/predaking2612/dev/tmp/fuchsia/scripts/fx-env.fish
+
+conda activate rclabs
+
+export PATH="/home/predaking2612/dev/development/repos/ReckonLabs/os/nemesys/fuchsia/.jiri_root/bin:$PATH"

@@ -18,9 +18,18 @@ Plug 'andymass/vim-matchup'
 Plug 'dpelle/vim-LanguageTool'
 Plug 'ap/vim-buftabline'
 
+" VHDL
+Plug 'suoto/vim-hdl'
+
+" Bazel
+Plug 'google/vim-maktaba'
+Plug 'bazelbuild/vim-bazel'
+
 " Syntax
 Plug 'vim-syntastic/syntastic'
 Plug 'honza/vim-snippets'
+
+Plug 'xuhdev/vim-latex-live-preview' 
 
 Plug 'airblade/vim-rooter'
 Plug 'junegunn/fzf.vim'
@@ -46,6 +55,8 @@ Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'tpope/vim-fugitive'
 Plug 'kassio/neoterm'
 Plug 'anned20/vimsence'
+Plug 'lervag/vimtex'
+Plug 'JuliaEditorSupport/julia-vim'
 call plug#end()
 "-----------------------------------------------------------------
 
@@ -141,6 +152,29 @@ command! -bang -nargs=* Rg
   \   <bang>0)
 
 
+" =================================================
+" LaTeX
+
+" settings for sumatraPDF
+
+let g:vimtex_view_method = 'zathura'
+let g:vimtex_view_general_options
+    \ = '-reuse-instance -forward-search @tex @line @pdf'
+" let g:vimtex_view_general_options_latexmk = '-reuse-instance'
+
+" TOC settings
+let g:vimtex_toc_config = {
+      \ 'name' : 'TOC',
+      \ 'layers' : ['content', 'todo', 'include'],
+      \ 'resize' : 1,
+      \ 'split_width' : 50,
+      \ 'todo_sorted' : 0,
+      \ 'show_help' : 1,
+      \ 'show_numbers' : 1,
+      \ 'mode' : 2,
+      \}
+
+" =================================================
 " Buffer swap
 function! MarkWindowSwap()
     let g:markedWinNum = winnr()
@@ -234,6 +268,10 @@ let g:coc_explorer_global_presets = {
 setlocal spell
 set spelllang=en_us
 inoremap <C-l> <c-g>u<Esc>[s1z=`]a<c-g>u
+
+" Julia Language Stuff
+runtime macros/matchit.vim
+
 
 " Use preset argument to open it
 nmap <space>ed :CocCommand explorer --preset .vim<CR>
